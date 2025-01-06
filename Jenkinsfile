@@ -80,4 +80,4 @@ pipeline {
             echo 'Pipeline failed.'
         }
     }
-}
+
