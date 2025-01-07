@@ -7,6 +7,17 @@ pipeline {
     }
 
     stages {
+
+        stage('Debug') {
+            steps {
+                script {
+                    echo "REMOTE_HOST=${REMOTE_HOST}"
+                    echo "LINUX_SSH=${LINUX_SSH}"
+                    echo "SSH_USER=${SSH_USER}"
+                }
+            }
+        }
+        
         stage('Install Apache2 on Remote VM') {
             steps {
                 script {
