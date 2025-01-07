@@ -19,7 +19,7 @@ pipeline {
         }
         
         stage('Install Apache2 on Remote VM') {
-            script {
+            steps {
                 sshagent(credentials: ['agent_ssh_jenkins']) {
                     sh """
                     sudo apt update
