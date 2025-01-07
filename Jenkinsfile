@@ -21,7 +21,7 @@ pipeline {
         stage('Install Apache2 on Remote VM') {
             steps {
                 script {
-                    sshagent (credentials: ['agent_ssh_jenkins']) {
+                    ssh (credentials: ['agent_ssh_jenkins']) {
                         sh """
                         ssh -i ${LINUX_SSH} ${SSH_USER}@${REMOTE_HOST} <<EOF
                         sudo apt update
@@ -40,7 +40,7 @@ pipeline {
         stage('Verify Apache2 Installation') {
             steps {
                 script {
-                    sshagent (credentials: ['agent_ssh_jenkins']) {
+                    ssh (credentials: ['agent_ssh_jenkins']) {
                         sh """
                         ssh -o StrictHostKeyChecking=no -i ${LINUX_SSH} ${SSH_USER}@${REMOTE_HOST} <<EOF
                         # Check Apache2 status
@@ -56,7 +56,7 @@ pipeline {
         stage('Check Apache2 Logs for Errors') {
             steps {
                 script {
-                    sshagent (credentials: ['agent_ssh_jenkins']) {
+                    ssh (credentials: ['agent_ssh_jenkins']) {
                         sh """
                         ssh -o StrictHostKeyChecking=no -i ${LINUX_SSH} ${SSH_USER}@${REMOTE_HOST} <<EOF
                         # Check logs for 4xx and 5xx errors
