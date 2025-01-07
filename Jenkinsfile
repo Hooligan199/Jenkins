@@ -4,7 +4,7 @@ pipeline {
         // REMOTE_HOST = credentials('remote_host')
         // LINUX_SSH = credentials('agent_jenkins')
         // SSH_USER = credentials('ssh_user')
-        SUDO_PASS = credentials('sudo_pass')
+        SUDO_ASKPASS = '/var/lib/jenkins/.askpass.sh'
     }
 
     stages {
@@ -12,12 +12,12 @@ pipeline {
             steps {
                 sshagent(credentials: ['agent_ssh_jenkins']) {
                     sh """
-                    sudo -A ${SUDO_PASS} apt update
-                    sudo -A ${SUDO_PASS} apt install -y apache2
+                    sudo -A apt update
+                    sudo -A apt install -y apache2
 
                     # Start Apache2
-                    sudo -A ${SUDO_PASS} systemctl start apache2
-                    sudo -A ${SUDO_PASS} systemctl enable apache2
+                    sudo -A systemctl start apache2
+                    sudo -A systemctl enable apache2
                     """
                 }
             }
