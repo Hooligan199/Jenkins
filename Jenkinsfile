@@ -22,12 +22,12 @@ pipeline {
             steps {
                 sshagent(credentials: ['agent_ssh_jenkins']) {
                     sh """
-                    sudo apt update
-                    sudo apt install -y apache2
+                    sudo -S apt update
+                    sudo -S apt install -y apache2
 
                     # Start Apache2
-                    sudo systemctl start apache2
-                    sudo systemctl enable apache2
+                    sudo -S systemctl start apache2
+                    sudo -S systemctl enable apache2
                     """
                 }
             }
