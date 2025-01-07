@@ -21,16 +21,14 @@ pipeline {
         stage('Install Apache2 on Remote VM') {
             steps {
                 script {
-                    ssh (credentials: ['agent_ssh_jenkins']) {
+                    ssh -i ${LINUX_SSH} ${SSH_USER}@${REMOTE_HOST} {
                         sh """
-                        ssh -i ${LINUX_SSH} ${SSH_USER}@${REMOTE_HOST} <<EOF
                         sudo apt update
                         sudo apt install -y apache2
 
                         # Start Apache2
                         sudo systemctl start apache2
                         sudo systemctl enable apache2
-                        EOF
                         """
                     }
                 }
