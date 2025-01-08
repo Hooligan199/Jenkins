@@ -40,7 +40,7 @@ pipeline {
                 sshagent (credentials: ['agent_ssh_jenkins']) {
                     sh """
                     # Check logs for 4xx and 5xx errors
-                    sudo cat /var/log/apache2/access.log | grep '" [45][0-9][0-9] '
+                    sudo grep " [45][0-9][0-9]" /var/log/apache2/access.log || echo "No 4xx or 5xx errors"
                     """
                 }
             }
